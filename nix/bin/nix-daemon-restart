@@ -16,7 +16,7 @@ restart_with_launchctl() {
   if command -v launchctl >/dev/null 2>&1; then
     # Common label used by multi-user Nix installs on macOS
     local label="org.nixos.nix-daemon"
-    if launchctl list | grep -q "$label"; then
+    if sudo launchctl list | grep -q "$label"; then
       echo "Restarting nix-daemon via launchctl..."
       sudo launchctl kickstart -k "system/$label"
       return 0
